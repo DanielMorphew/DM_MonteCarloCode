@@ -1,0 +1,38 @@
+	MODULE NEWPENERGYI
+	USE COMMONS
+	USE CALCENERGYI
+	CONTAINS
+	
+	SUBROUTINE NEWPENERGY(NEWCOORDS, NEWQUARTS, O, JB, IND)
+	IMPLICIT NONE
+
+	INTEGER :: O 
+	INTEGER :: JB
+	INTEGER :: J
+	INTEGER :: P
+	INTEGER :: IND
+	DOUBLE PRECISION :: JENERGY
+	DOUBLE PRECISION :: R2
+	DOUBLE PRECISION :: DX
+	DOUBLE PRECISION :: DY
+	DOUBLE PRECISION :: DZ
+	DOUBLE PRECISION :: NEWCOORDS(7*NMOL)
+	NPENERGY = 0.D0
+	P = 3*O
+	
+	IF (IND == 2) THEN
+		DO J = JB, NMOL
+			IF (3*J .NE. P) THEN
+                                DX = NEWCOORDS(P-2) - NEWCOORDS(3*J-2)
+                                DY = NEWCOORDS(P-1) - NEWCOORDS(3*J-1)
+                                DZ = NEWCOORDS(P) - NEWCOORDS(3*J)
+                                R2 = DX*DX + DY*DY + DZ*DZ
+                                CALL CALCENERGY(R2, JENERGY)
+                                NPENERGY = NPENERGY + JENERGY
+                        END IF
+                END DO
+	END IF
+
+	RETURN
+	END SUBROUTINE
+	END MODULE

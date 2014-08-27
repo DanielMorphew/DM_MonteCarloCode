@@ -1,0 +1,9 @@
+14             !NMOL
+12.5D0          !RADIUS 
+1.0D0          !TEMP
+1000              !NMCE
+1000              !NMCP
+1              !NMCS
+1             !NDISP
+0.5D0          !MAXSTEP
+0.5D0         !MAXROT

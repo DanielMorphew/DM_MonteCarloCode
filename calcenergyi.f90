@@ -1,0 +1,31 @@
+	MODULE CALCENERGYI
+	CONTAINS
+	SUBROUTINE CALCENERGY(R2, JENERGY, SI(3), SJ(3), QRIJ(3), DQUART)
+	IMPLICIT NONE
+
+	DOUBLE PRECISION :: R2, R, YKAPPA, EXPYK, JENERGY, EUNIT1, EUNIT2, SI(3), SJ(3), QRIJ(3), DQUARTS
+	JENERGY =0.D0
+	EXPYK = 0.D0
+	R = 0.D0
+!------DEFINE RC AND TAILCUT--------
+
+!------USING THE YUKUWA POTENTIAL TO CALCULATE THE NERGY OF PARTICLE O RELATIVE TO PARTICLE J------
+	YKAPPA = 1.0D0
+	R = DSQRT(R2)
+	EXPYK = EXP(-YKAPPA*(R-1.0D0))
+	EUNIT1 = EXPYK/R
+	
+!-------------------------Calculate potential of electric dipole moment-----------------------------
+
+	T1 = (U*U)/(DQUARTS^3)
+	T2 = DOT_PRODUCT(SI,SJ)
+	T3 = (3/(QDARTS^2))*(DOT_PRODUCT(SI,QRIJ))*(DOT_PRODUCT(SJ,QRIJ))
+	EUNIT2 = T1*(T2-T3)
+
+!------------------------Total potential energy---------------------------
+
+	JENERGY = EUNIT1 + EUNIT2
+
+	RETURN
+	END SUBROUTINE
+	END MODULE

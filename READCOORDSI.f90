@@ -1,0 +1,24 @@
+	MODULE READCOORDSI
+	USE COMMONS
+	CONTAINS
+	SUBROUTINE READCOORDS
+	IMPLICIT NONE
+        INTEGER :: I, J, status, flap10
+        CHARACTER (LEN=10) :: CI, CONFIGFILE
+        CONFIGFILE = 'COORDS'
+        OPEN(UNIT = 21, FILE = CONFIGFILE, STATUS = 'OLD')
+        
+
+        
+
+	DO I = 1, NMOL 
+                READ(21,*) COORDS(1,I), COORDS(2,I), COORDS(3,I)  
+        END DO
+
+        DO J = 1, NMOL
+                READ(21,*) QUARTS(1,J), QUARTS(2,J), QUARTS(3,J), QUARTS(4,J)
+        END DO
+        
+        END SUBROUTINE
+	END MODULE 
+
